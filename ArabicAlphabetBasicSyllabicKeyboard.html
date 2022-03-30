@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Arabic Alphabet Syllabic Basic Keyboard</title>
+        
+        <link href='https://fonts.googleapis.com/css?family=Amiri' rel='stylesheet'>
+        
+		<style>
+			button {
+				font-size: 3em;
+                font-family: 'Amiri';
+				margin: 0.4em;
+				padding: 0.2em;
+			}
+
+			textarea {
+				font-size: 2em;
+                font-family: 'Amiri';
+                padding: 1em;
+
+			}
+		</style>
+        
+	</head>
+	<body>
+		<h1>Arabic Alphabet Syllabic Basic Keyboard</h1>
+		<textarea id="textOutput" dir="rtl" style="width:100%"></textarea>
+        <div id="root"></div>
+        
+		<div dir="rtl" style="text-align:left">
+
+            
+            <div>
+
+		</div>
+            
+            <script>
+            
+            // This function returns a function.
+            function writeFunction(someText) {
+                function writeIt() {
+                    document.getElementById("textOutput").value += someText;
+                }
+                return writeIt;
+                
+            }
+            
+            function createAndAttachButtonForWriting(currentText) {
+                var root = document.getElementById("root");
+                var firstButton = document.createElement("button");
+                var firstButtonText = document.createTextNode(currentText);
+                firstButton.appendChild(firstButtonText);
+                firstButton.onclick = writeFunction(currentText);
+                root.appendChild(firstButton);
+            }
+
+            var arabicAlphabet = [
+"\u0627",
+"\u0628",
+"\u062A",
+"\u062B",
+"\u062C",
+"\u062D",
+"\u062E",
+"\u062F",
+"\u0630",
+"\u0631",
+"\u0632",
+"\u0633",
+"\u0634",
+"\u0635",
+"\u0636",
+"\u0637",
+"\u0638",
+"\u0639",
+"\u063A",
+"\u0641",
+"\u0642",
+"\u0643",
+"\u0644",
+"\u0645",
+"\u0646",
+"\u0647",
+"\u0648",
+"\u064A",
+"\u0623",
+"\u0624",
+"\u0626",
+                                  
+                            ];
+
+
+
+
+
+
+var hebrewAlphabet = arabicAlphabet;
+
+var dagesh = "\u0651";
+
+var alefWithHamzaAbove = "\u0623";
+var alefWithHamzaBelow = "\u0625";
+
+var vowelDiacriticsForArabic = [
+                                "\u064E",
+                                "\u064F",
+                                "\u0650",
+                                "\u064B",
+                                "\u064C",
+                                "\u064D",
+                                "\u0652",
+                                ];
+
+var vowelDiacriticsForVavForArabic = vowelDiacriticsForArabic; // There is no holam in Arabic so we don't need two of them for vav.
+
+var vowelDiacriticsForHebrew = ["\u05B0", "\u05B1", "\u05B2", "\u05B3", "\u05B4", "\u05B5", "\u05B6", "\u05B7", "\u05B8", "\u05B9", "\u05BB"];
+
+var vowelDiacriticsForVavForHebrew = ["\u05B0", "\u05B1", "\u05B2", "\u05B3", "\u05B4", "\u05B5", "\u05B6", "\u05B7", "\u05B8", "\u05B9", "\u05BA", "\u05BB"];
+
+var vowelDiacritics = vowelDiacriticsForArabic;
+var vowelDiacriticsForVav = vowelDiacriticsForVavForArabic;
+
+		var root = document.getElementById("root");
+		root.dir = "rtl";
+		for (var i = 0; i < hebrewAlphabet.length; i++) {
+            		createAndAttachButtonForWriting(hebrewAlphabet[i]);
+		}
+
+		for (var i = 0; i < hebrewAlphabet.length; i++) {
+			if (hebrewAlphabet[i] == "\u05D5") {
+				for (var j = 0; j < vowelDiacritics.length; j++) {
+					createAndAttachButtonForWriting(hebrewAlphabet[i] + vowelDiacriticsForVav[j]);
+				}
+			} else {
+
+				for (var j = 0; j < vowelDiacritics.length; j++) {
+                    if (hebrewAlphabet[i] == alefWithHamzaAbove && (vowelDiacritics[j] == "\u064D"  || vowelDiacritics[j] == "\u0650")) {
+                        
+                        createAndAttachButtonForWriting(alefWithHamzaBelow + vowelDiacritics[j]);
+
+                    } else {
+                        createAndAttachButtonForWriting(hebrewAlphabet[i] + vowelDiacritics[j]);
+                    }
+				}
+
+			}
+            		createAndAttachButtonForWriting(hebrewAlphabet[i] + dagesh);
+
+			if (hebrewAlphabet[i] == "\u05D5") {
+				for (var j = 0; j < vowelDiacritics.length; j++) {
+					createAndAttachButtonForWriting(hebrewAlphabet[i] + dagesh + vowelDiacriticsForVav[j]);
+				}
+			} else {
+
+				for (var j = 0; j < vowelDiacritics.length; j++) {
+                    if (hebrewAlphabet[i] == alefWithHamzaAbove && (vowelDiacritics[j] == "\u064D"  || vowelDiacritics[j] == "\u0650")) {
+                        
+                        createAndAttachButtonForWriting(alefWithHamzaBelow + dagesh +  vowelDiacritics[j]);
+
+                    } else {
+                        createAndAttachButtonForWriting(hebrewAlphabet[i] + dagesh +  vowelDiacritics[j]);
+                    }
+				}
+
+			}
+
+
+		}
+                
+                
+            
+            
+            </script>
+
+	</body>
+</html>
